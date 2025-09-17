@@ -13,6 +13,11 @@ import {
   MessageSquare,
   Bell,
   LogOut,
+  MapPin,
+  GraduationCap,
+  Bot,
+  FileSearch,
+  Video,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -31,6 +36,10 @@ const sidebarItems = {
     { id: "internships", label: "Find Internships", icon: BookOpen },
     { id: "applications", label: "My Applications", icon: FileText },
     { id: "progress", label: "Progress Tracker", icon: BarChart3 },
+    { id: "mentorship", label: "Mentorship Sessions", icon: Video },
+    { id: "rural-access", label: "Rural Access Hub", icon: MapPin },
+    { id: "skill-development", label: "Skill Development", icon: GraduationCap },
+    { id: "ai-chat", label: "AI Learning Assistant", icon: Bot },
     { id: "profile", label: "Profile", icon: User },
     { id: "messages", label: "Messages", icon: MessageSquare },
   ],
@@ -39,6 +48,7 @@ const sidebarItems = {
     { id: "students", label: "Student Oversight", icon: Users },
     { id: "evaluations", label: "Evaluations", icon: FileText },
     { id: "reports", label: "Reports", icon: BarChart3 },
+    { id: "resume-analyzer", label: "Resume Analyzer", icon: FileSearch },
     { id: "calendar", label: "Calendar", icon: Calendar },
     { id: "messages", label: "Messages", icon: MessageSquare },
   ],
@@ -48,6 +58,7 @@ const sidebarItems = {
     { id: "candidates", label: "Candidates", icon: Users },
     { id: "interns", label: "Manage Interns", icon: Building2 },
     { id: "analytics", label: "Analytics", icon: BarChart3 },
+    { id: "resume-analyzer", label: "Resume Analyzer", icon: FileSearch },
     { id: "messages", label: "Messages", icon: MessageSquare },
   ],
   admin: [

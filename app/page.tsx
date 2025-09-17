@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { Sidebar } from "@/components/sidebar"
+import { ResponsiveLayout } from "@/components/responsive-layout"
 import { StudentDashboard } from "@/components/dashboards/student-dashboard"
 import { FacultyDashboard } from "@/components/dashboards/faculty-dashboard"
 import { IndustryDashboard } from "@/components/dashboards/industry-dashboard"
@@ -36,12 +36,12 @@ export default function HomePage() {
             transition={{ duration: 0.5 }}
             className="w-full max-w-4xl"
           >
-            <div className="text-center mb-12">
+            <div className="text-center mb-8 md:mb-12">
               <motion.h1
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="text-4xl font-bold text-foreground mb-4"
+                className="text-3xl md:text-4xl font-bold text-foreground mb-4"
               >
                 Welcome to Prashiskshan
               </motion.h1>
@@ -49,13 +49,13 @@ export default function HomePage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
-                className="text-xl text-muted-foreground"
+                className="text-lg md:text-xl text-muted-foreground px-4"
               >
                 Your comprehensive internship management platform
               </motion.p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-4">
               {[
                 {
                   type: "student" as UserType,
@@ -95,19 +95,19 @@ export default function HomePage() {
                     transition={{ delay: 0.1 * index }}
                   >
                     <Card
-                      className="h-full hover:shadow-lg transition-shadow cursor-pointer"
+                      className="h-full hover:shadow-lg transition-shadow cursor-pointer touch-manipulation"
                       onClick={() => setUserType(portal.type)}
                     >
-                      <CardHeader className="text-center">
+                      <CardHeader className="text-center p-4 md:p-6">
                         <div
-                          className={`w-16 h-16 ${portal.color} rounded-full flex items-center justify-center mx-auto mb-4`}
+                          className={`w-12 h-12 md:w-16 md:h-16 ${portal.color} rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4`}
                         >
-                          <Icon className="h-8 w-8 text-white" />
+                          <Icon className="h-6 w-6 md:h-8 md:w-8 text-white" />
                         </div>
-                        <CardTitle className="text-lg">{portal.title}</CardTitle>
+                        <CardTitle className="text-base md:text-lg">{portal.title}</CardTitle>
                         <CardDescription className="text-sm">{portal.description}</CardDescription>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="p-4 md:p-6 pt-0">
                         <Button className="w-full bg-transparent" variant="outline">
                           Enter Portal
                         </Button>
@@ -140,10 +140,9 @@ export default function HomePage() {
 
   return (
     <AuthGuard>
-      <div className="min-h-screen bg-background">
-        <Sidebar userType={userType} activeTab={activeTab} onTabChange={setActiveTab} />
-        <main className="ml-64 min-h-screen">{renderDashboard()}</main>
-      </div>
+      <ResponsiveLayout userType={userType} activeTab={activeTab} onTabChange={setActiveTab}>
+        {renderDashboard()}
+      </ResponsiveLayout>
     </AuthGuard>
   )
 }

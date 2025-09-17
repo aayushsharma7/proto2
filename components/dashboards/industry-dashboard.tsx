@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ResumeAnalyzer } from "@/components/resume-analyzer"
 import {
   Users,
   FileText,
@@ -1009,6 +1010,22 @@ export function IndustryDashboard({ activeTab }: IndustryDashboardProps) {
     </div>
   )
 
+  const renderResumeAnalyzer = () => (
+    <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>Resume Analyzer</CardTitle>
+          <CardDescription>
+            Analyze candidate resumes and automatically score them based on your job requirements
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ResumeAnalyzer userType="industry" />
+        </CardContent>
+      </Card>
+    </div>
+  )
+
   const renderContent = () => {
     switch (activeTab) {
       case "dashboard":
@@ -1023,6 +1040,8 @@ export function IndustryDashboard({ activeTab }: IndustryDashboardProps) {
         return renderAnalytics()
       case "messages":
         return renderMessages()
+      case "resume-analyzer":
+        return renderResumeAnalyzer()
       default:
         return renderDashboardOverview()
     }

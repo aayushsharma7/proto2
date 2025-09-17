@@ -27,6 +27,7 @@ import {
   MessageSquare,
 } from "lucide-react"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
+import { ResumeAnalyzer } from "@/components/resume-analyzer"
 
 interface FacultyDashboardProps {
   activeTab: string
@@ -921,6 +922,22 @@ export function FacultyDashboard({ activeTab }: FacultyDashboardProps) {
     </div>
   )
 
+  const renderResumeAnalyzer = () => (
+    <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>Resume Analyzer</CardTitle>
+          <CardDescription>
+            Analyze student resumes and automatically score candidates based on job requirements
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ResumeAnalyzer userType="faculty" />
+        </CardContent>
+      </Card>
+    </div>
+  )
+
   const renderContent = () => {
     switch (activeTab) {
       case "dashboard":
@@ -935,6 +952,8 @@ export function FacultyDashboard({ activeTab }: FacultyDashboardProps) {
         return renderCalendar()
       case "messages":
         return renderMessages()
+      case "resume-analyzer":
+        return renderResumeAnalyzer()
       default:
         return renderDashboardOverview()
     }
