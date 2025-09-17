@@ -4,6 +4,7 @@ import * as React from "react"
 import { useAuth } from "@/hooks/use-auth"
 import { LoginForm } from "./login-form"
 import { RegisterForm } from "./register-form"
+import { ThemeToggle } from "@/components/theme-toggle"
 import { motion } from "framer-motion"
 
 interface AuthGuardProps {
@@ -22,6 +23,10 @@ export function AuthGuard({ children, requiredRole }: AuthGuardProps) {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <div className="fixed top-4 right-4 z-50">
+          <ThemeToggle />
+        </div>
+
         <div className="w-full max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             {/* Left side - Branding */}
@@ -75,6 +80,10 @@ export function AuthGuard({ children, requiredRole }: AuthGuardProps) {
   if (requiredRole && user?.role !== requiredRole) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <div className="fixed top-4 right-4 z-50">
+          <ThemeToggle />
+        </div>
+
         <div className="text-center">
           <h1 className="text-2xl font-bold text-foreground mb-4">Access Denied</h1>
           <p className="text-muted-foreground">You don't have permission to access this page.</p>
