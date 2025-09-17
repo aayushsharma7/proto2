@@ -29,11 +29,14 @@ export function MobileSidebar({ userType, activeTab, onTabChange }: MobileSideba
 
   return (
     <>
-      {/* Mobile Header */}
       <div className="fixed top-0 left-0 right-0 z-50 h-16 bg-sidebar border-b border-sidebar-border flex items-center justify-between px-4">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="text-sidebar-foreground">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-sidebar-foreground p-3 touch-manipulation min-h-[44px] min-w-[44px]"
+            >
               <Menu className="h-6 w-6" />
             </Button>
           </SheetTrigger>
@@ -46,14 +49,13 @@ export function MobileSidebar({ userType, activeTab, onTabChange }: MobileSideba
         <motion.h1
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-lg font-semibold text-sidebar-foreground"
+          className="text-lg font-semibold text-sidebar-foreground truncate"
         >
           Prashiskshan
         </motion.h1>
-        <div className="w-10" /> {/* Spacer for centering */}
+        <div className="w-12" /> {/* Increased spacer for better centering */}
       </div>
 
-      {/* Mobile Content Spacer */}
       <div className="h-16" />
     </>
   )

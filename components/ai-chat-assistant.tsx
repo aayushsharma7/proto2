@@ -76,29 +76,35 @@ export function AIChatAssistant({ className }: AIChatAssistantProps) {
 
   return (
     <div className={className}>
-      <Card className="h-[600px] flex flex-col">
-        <CardHeader className="pb-4">
-          <CardTitle className="flex items-center gap-2">
-            <Bot className="h-5 w-5 text-primary" />
-            AI Learning Assistant
+      <Card className="h-[calc(100vh-10rem)] sm:h-[600px] flex flex-col w-full max-w-none">
+        <CardHeader className="pb-4 px-4 sm:px-6">
+          <CardTitle className="flex items-center gap-3 text-lg sm:text-xl">
+            <Bot className="h-5 w-5 sm:h-6 sm:w-6 text-primary flex-shrink-0" />
+            <span className="truncate">AI Learning Assistant</span>
           </CardTitle>
-          <CardDescription>Practice skills, learn new concepts, and get career guidance</CardDescription>
+          <CardDescription className="text-sm sm:text-base">
+            Practice skills, learn new concepts, and get career guidance
+          </CardDescription>
         </CardHeader>
 
-        <CardContent className="flex-1 flex flex-col p-0">
-          {/* Messages Area */}
-          <ScrollArea className="flex-1 px-6" ref={scrollAreaRef}>
-            <div className="space-y-4 pb-4">
+        <CardContent className="flex-1 flex flex-col p-0 min-h-0">
+          <ScrollArea className="flex-1 px-4 sm:px-6" ref={scrollAreaRef}>
+            <div className="space-y-4 sm:space-y-6 pb-4">
               {messages.length === 0 && (
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center py-8">
-                  <Bot className="h-12 w-12 text-primary mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">Welcome to your AI Learning Assistant!</h3>
-                  <p className="text-muted-foreground mb-6">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-center py-6 sm:py-8"
+                >
+                  <Bot className="h-12 w-12 sm:h-16 sm:w-16 text-primary mx-auto mb-4 sm:mb-6" />
+                  <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">
+                    Welcome to your AI Learning Assistant!
+                  </h3>
+                  <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base px-2">
                     I'm here to help you prepare for internships, learn new skills, and advance your career.
                   </p>
 
-                  {/* Quick Prompts */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-2xl mx-auto">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 max-w-2xl mx-auto">
                     {quickPrompts.map((prompt, index) => {
                       const Icon = prompt.icon
                       return (
@@ -110,14 +116,14 @@ export function AIChatAssistant({ className }: AIChatAssistantProps) {
                         >
                           <Button
                             variant="outline"
-                            className="w-full h-auto p-4 text-left hover:shadow-md transition-shadow bg-transparent"
+                            className="w-full h-auto p-4 sm:p-5 text-left hover:shadow-md transition-shadow bg-transparent touch-manipulation min-h-[60px]"
                             onClick={() => handleQuickPrompt(prompt.prompt)}
                           >
-                            <div className="flex items-start gap-3">
-                              <Icon className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                              <div className="flex-1">
-                                <div className="font-medium text-sm">{prompt.title}</div>
-                                <Badge variant="secondary" className="text-xs mt-1">
+                            <div className="flex items-start gap-3 w-full">
+                              <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-primary flex-shrink-0 mt-0.5" />
+                              <div className="flex-1 min-w-0 text-left">
+                                <div className="font-medium text-sm sm:text-base mb-1">{prompt.title}</div>
+                                <Badge variant="secondary" className="text-xs">
                                   {prompt.category}
                                 </Badge>
                               </div>
@@ -138,25 +144,27 @@ export function AIChatAssistant({ className }: AIChatAssistantProps) {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
-                    className={`flex gap-3 ${message.role === "user" ? "justify-end" : "justify-start"}`}
+                    className={`flex gap-3 sm:gap-4 ${message.role === "user" ? "justify-end" : "justify-start"}`}
                   >
                     {message.role === "assistant" && (
-                      <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                        <Bot className="h-4 w-4 text-white" />
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+                        <Bot className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                       </div>
                     )}
 
                     <div
-                      className={`max-w-[80%] rounded-lg px-4 py-3 ${
+                      className={`max-w-[80%] sm:max-w-[75%] rounded-lg px-4 py-3 sm:px-5 sm:py-4 ${
                         message.role === "user" ? "bg-primary text-primary-foreground ml-auto" : "bg-muted"
                       }`}
                     >
-                      <div className="text-sm whitespace-pre-wrap">{message.content}</div>
+                      <div className="text-sm sm:text-base whitespace-pre-wrap break-words leading-relaxed">
+                        {message.content}
+                      </div>
                     </div>
 
                     {message.role === "user" && (
-                      <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
-                        <User className="h-4 w-4 text-white" />
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
+                        <User className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                       </div>
                     )}
                   </motion.div>
@@ -167,15 +175,15 @@ export function AIChatAssistant({ className }: AIChatAssistantProps) {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="flex gap-3 justify-start"
+                  className="flex gap-3 sm:gap-4 justify-start"
                 >
-                  <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                    <Bot className="h-4 w-4 text-white" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+                    <Bot className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                   </div>
-                  <div className="bg-muted rounded-lg px-4 py-3">
+                  <div className="bg-muted rounded-lg px-4 py-3 sm:px-5 sm:py-4">
                     <div className="flex items-center gap-2">
-                      <Sparkles className="h-4 w-4 animate-pulse text-primary" />
-                      <span className="text-sm text-muted-foreground">AI is thinking...</span>
+                      <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 animate-pulse text-primary" />
+                      <span className="text-sm sm:text-base text-muted-foreground">AI is thinking...</span>
                     </div>
                   </div>
                 </motion.div>
@@ -183,21 +191,25 @@ export function AIChatAssistant({ className }: AIChatAssistantProps) {
             </div>
           </ScrollArea>
 
-          {/* Input Area */}
-          <div className="border-t p-4">
-            <form onSubmit={handleSubmit} className="flex gap-2">
+          <div className="border-t p-4 sm:p-6 bg-background">
+            <form onSubmit={handleSubmit} className="flex gap-3">
               <Input
                 value={input}
                 onChange={handleInputChange}
                 placeholder="Ask me anything about skills, interviews, or career advice..."
                 disabled={isLoading}
-                className="flex-1"
+                className="flex-1 text-sm sm:text-base min-h-[44px]"
               />
-              <Button type="submit" disabled={isLoading || !input || !input.trim()}>
-                <Send className="h-4 w-4" />
+              <Button
+                type="submit"
+                disabled={isLoading || !input || !input.trim()}
+                size="sm"
+                className="px-4 sm:px-6 min-h-[44px] min-w-[44px]"
+              >
+                <Send className="h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
             </form>
-            <p className="text-xs text-muted-foreground mt-2 text-center">
+            <p className="text-xs text-muted-foreground mt-3 text-center px-2">
               AI responses are generated and may not always be accurate. Use as guidance only.
             </p>
           </div>

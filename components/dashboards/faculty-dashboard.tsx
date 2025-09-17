@@ -138,9 +138,9 @@ export function FacultyDashboard({ activeTab }: FacultyDashboardProps) {
   const [selectedFilter, setSelectedFilter] = React.useState("all")
 
   const renderDashboardOverview = () => (
-    <div className="space-y-6">
+    <div className="space-y-6 md:space-y-8">
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         {[
           { title: "Total Students", value: "128", change: "+5%", icon: Users, color: "text-primary" },
           { title: "Active Internships", value: "89", change: "+12%", icon: FileText, color: "text-secondary" },
@@ -156,16 +156,18 @@ export function FacultyDashboard({ activeTab }: FacultyDashboardProps) {
               transition={{ delay: 0.1 * index }}
             >
               <Card>
-                <CardContent className="p-6">
+                <CardContent className="p-4 md:p-6">
                   <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-muted-foreground">{stat.title}</p>
-                      <p className="text-2xl font-bold">{stat.value}</p>
-                      <p className={`text-xs ${stat.change.startsWith("+") ? "text-green-600" : "text-red-600"}`}>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm md:text-base font-medium text-muted-foreground">{stat.title}</p>
+                      <p className="text-xl md:text-2xl font-bold">{stat.value}</p>
+                      <p
+                        className={`text-xs sm:text-sm ${stat.change.startsWith("+") ? "text-green-600" : "text-red-600"}`}
+                      >
                         {stat.change} from last month
                       </p>
                     </div>
-                    <Icon className={`h-8 w-8 ${stat.color}`} />
+                    <Icon className={`h-7 w-7 md:h-8 md:w-8 ${stat.color} flex-shrink-0`} />
                   </div>
                 </CardContent>
               </Card>
@@ -175,14 +177,16 @@ export function FacultyDashboard({ activeTab }: FacultyDashboardProps) {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8">
         <Card>
-          <CardHeader>
-            <CardTitle>Student Performance Trends</CardTitle>
-            <CardDescription>Monthly performance distribution across all students</CardDescription>
+          <CardHeader className="p-4 md:p-6">
+            <CardTitle className="text-lg md:text-xl">Student Performance Trends</CardTitle>
+            <CardDescription className="text-sm md:text-base">
+              Monthly performance distribution across all students
+            </CardDescription>
           </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
+          <CardContent className="p-4 md:p-6 pt-0">
+            <ResponsiveContainer width="100%" height={320}>
               <BarChart data={performanceData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="month" />
@@ -198,12 +202,14 @@ export function FacultyDashboard({ activeTab }: FacultyDashboardProps) {
         </Card>
 
         <Card>
-          <CardHeader>
-            <CardTitle>Internship Status Distribution</CardTitle>
-            <CardDescription>Current status of all students in the program</CardDescription>
+          <CardHeader className="p-4 md:p-6">
+            <CardTitle className="text-lg md:text-xl">Internship Status Distribution</CardTitle>
+            <CardDescription className="text-sm md:text-base">
+              Current status of all students in the program
+            </CardDescription>
           </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
+          <CardContent className="p-4 md:p-6 pt-0">
+            <ResponsiveContainer width="100%" height={320}>
               <PieChart>
                 <Pie
                   data={statusDistribution}
@@ -228,26 +234,32 @@ export function FacultyDashboard({ activeTab }: FacultyDashboardProps) {
 
       {/* Department Performance */}
       <Card>
-        <CardHeader>
-          <CardTitle>Department-wise Performance</CardTitle>
-          <CardDescription>Internship placement statistics by department</CardDescription>
+        <CardHeader className="p-4 md:p-6">
+          <CardTitle className="text-lg md:text-xl">Department-wise Performance</CardTitle>
+          <CardDescription className="text-sm md:text-base">
+            Internship placement statistics by department
+          </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-4 md:p-6 pt-0">
           <div className="space-y-4">
             {departmentStats.map((dept, index) => (
-              <div key={dept.department} className="flex items-center justify-between p-4 border rounded-lg">
-                <div className="flex-1">
-                  <h3 className="font-semibold">{dept.department}</h3>
-                  <p className="text-sm text-muted-foreground">
+              <div
+                key={dept.department}
+                className="flex flex-col sm:flex-row sm:items-center justify-between p-4 border rounded-lg gap-4"
+              >
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-sm md:text-base">{dept.department}</h3>
+                  <p className="text-xs md:text-sm text-muted-foreground">
                     {dept.placed} of {dept.students} students placed
                   </p>
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-32">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="w-24 sm:w-32">
                     <Progress value={dept.percentage} className="h-2" />
                   </div>
                   <Badge
                     variant={dept.percentage >= 80 ? "default" : dept.percentage >= 70 ? "secondary" : "destructive"}
+                    className="flex-shrink-0"
                   >
                     {dept.percentage}%
                   </Badge>
@@ -260,12 +272,14 @@ export function FacultyDashboard({ activeTab }: FacultyDashboardProps) {
 
       {/* Recent Activities */}
       <Card>
-        <CardHeader>
-          <CardTitle>Recent Activities</CardTitle>
-          <CardDescription>Latest updates from students and industry partners</CardDescription>
+        <CardHeader className="p-4 md:p-6">
+          <CardTitle className="text-lg md:text-xl">Recent Activities</CardTitle>
+          <CardDescription className="text-sm md:text-base">
+            Latest updates from students and industry partners
+          </CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
+        <CardContent className="p-4 md:p-6 pt-0">
+          <div className="space-y-3 md:space-y-4">
             {[
               {
                 activity: "John Doe submitted weekly report",
@@ -292,9 +306,9 @@ export function FacultyDashboard({ activeTab }: FacultyDashboardProps) {
                 priority: "urgent",
               },
             ].map((activity, index) => (
-              <div key={index} className="flex items-center space-x-4 p-3 rounded-lg bg-muted/50">
+              <div key={index} className="flex items-center space-x-3 md:space-x-4 p-3 md:p-4 rounded-lg bg-muted/50">
                 <div
-                  className={`w-2 h-2 rounded-full ${
+                  className={`w-2 h-2 rounded-full flex-shrink-0 ${
                     activity.priority === "urgent"
                       ? "bg-red-500"
                       : activity.priority === "high"
@@ -302,8 +316,8 @@ export function FacultyDashboard({ activeTab }: FacultyDashboardProps) {
                         : "bg-green-500"
                   }`}
                 />
-                <div className="flex-1">
-                  <p className="text-sm font-medium">{activity.activity}</p>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium truncate">{activity.activity}</p>
                   <p className="text-xs text-muted-foreground">{activity.time}</p>
                 </div>
                 <Badge
@@ -314,6 +328,7 @@ export function FacultyDashboard({ activeTab }: FacultyDashboardProps) {
                         ? "secondary"
                         : "outline"
                   }
+                  className="flex-shrink-0"
                 >
                   {activity.priority}
                 </Badge>
@@ -329,8 +344,8 @@ export function FacultyDashboard({ activeTab }: FacultyDashboardProps) {
     <div className="space-y-6">
       {/* Search and Filters */}
       <Card>
-        <CardContent className="p-6">
-          <div className="flex flex-col md:flex-row gap-4">
+        <CardContent className="p-4 md:p-6">
+          <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex-1">
               <div className="relative">
                 <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
@@ -338,12 +353,12 @@ export function FacultyDashboard({ activeTab }: FacultyDashboardProps) {
                   placeholder="Search students..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
+                  className="pl-10 min-h-[44px]"
                 />
               </div>
             </div>
             <Select value={selectedFilter} onValueChange={setSelectedFilter}>
-              <SelectTrigger className="w-full md:w-48">
+              <SelectTrigger className="w-full sm:w-48 min-h-[44px]">
                 <Filter className="h-4 w-4 mr-2" />
                 <SelectValue placeholder="Filter by status" />
               </SelectTrigger>
@@ -360,11 +375,13 @@ export function FacultyDashboard({ activeTab }: FacultyDashboardProps) {
 
       {/* Student List */}
       <Card>
-        <CardHeader>
-          <CardTitle>Student Overview</CardTitle>
-          <CardDescription>Monitor all students and their internship progress</CardDescription>
+        <CardHeader className="p-4 md:p-6">
+          <CardTitle className="text-lg md:text-xl">Student Overview</CardTitle>
+          <CardDescription className="text-sm md:text-base">
+            Monitor all students and their internship progress
+          </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-4 md:p-6 pt-0">
           <div className="space-y-4">
             {mockStudents.map((student, index) => (
               <motion.div
@@ -372,17 +389,17 @@ export function FacultyDashboard({ activeTab }: FacultyDashboardProps) {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1 * index }}
-                className="flex items-center justify-between p-4 border rounded-lg hover:shadow-md transition-shadow"
+                className="flex flex-col lg:flex-row lg:items-center justify-between p-4 border rounded-lg hover:shadow-md transition-shadow gap-4"
               >
-                <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <div>
-                    <h3 className="font-semibold">{student.name}</h3>
-                    <p className="text-sm text-muted-foreground">{student.rollNumber}</p>
+                <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="min-w-0">
+                    <h3 className="font-semibold text-sm md:text-base truncate">{student.name}</h3>
+                    <p className="text-xs md:text-sm text-muted-foreground">{student.rollNumber}</p>
                     <p className="text-xs text-muted-foreground">{student.course}</p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium">CGPA: {student.cgpa}</p>
-                    <p className="text-sm text-muted-foreground">{student.year}</p>
+                    <p className="text-xs md:text-sm font-medium">CGPA: {student.cgpa}</p>
+                    <p className="text-xs md:text-sm text-muted-foreground">{student.year}</p>
                   </div>
                   <div>
                     <Badge
@@ -393,28 +410,29 @@ export function FacultyDashboard({ activeTab }: FacultyDashboardProps) {
                             ? "secondary"
                             : "outline"
                       }
+                      className="text-xs"
                     >
                       {student.internshipStatus}
                     </Badge>
-                    <p className="text-sm text-muted-foreground mt-1">{student.company}</p>
+                    <p className="text-xs md:text-sm text-muted-foreground mt-1 truncate">{student.company}</p>
                   </div>
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-sm">Progress:</span>
-                      <span className="text-sm font-medium">{student.progress}%</span>
+                      <span className="text-xs md:text-sm">Progress:</span>
+                      <span className="text-xs md:text-sm font-medium">{student.progress}%</span>
                     </div>
                     <Progress value={student.progress} className="h-2" />
                     <p className="text-xs text-muted-foreground mt-1">Updated: {student.lastUpdate}</p>
                   </div>
                 </div>
-                <div className="flex gap-2 ml-4">
-                  <Button variant="outline" size="sm">
+                <div className="flex gap-2 lg:ml-4 justify-end">
+                  <Button variant="outline" size="sm" className="min-h-[36px] min-w-[36px] bg-transparent">
                     <Eye className="h-4 w-4" />
                   </Button>
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" className="min-h-[36px] min-w-[36px] bg-transparent">
                     <MessageSquare className="h-4 w-4" />
                   </Button>
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" className="min-h-[36px] min-w-[36px] bg-transparent">
                     <Edit className="h-4 w-4" />
                   </Button>
                 </div>
@@ -960,10 +978,17 @@ export function FacultyDashboard({ activeTab }: FacultyDashboardProps) {
   }
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} className="p-6">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-foreground">Faculty Coordinator Dashboard</h1>
-        <p className="text-muted-foreground">Oversee student progress and manage evaluations</p>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="p-4 md:p-6 space-y-6"
+    >
+      <div className="mb-6 md:mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold text-foreground">Faculty Coordinator Dashboard</h1>
+        <p className="text-sm md:text-base text-muted-foreground mt-1">
+          Oversee student progress and manage evaluations
+        </p>
       </div>
 
       {renderContent()}

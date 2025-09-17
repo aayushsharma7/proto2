@@ -211,9 +211,9 @@ export function StudentDashboard({ activeTab }: StudentDashboardProps) {
   const [selectedFilter, setSelectedFilter] = React.useState("all")
 
   const renderDashboardOverview = () => (
-    <div className="space-y-4 md:space-y-6">
+    <div className="space-y-6 md:space-y-8">
       {/* Stats Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         {[
           { title: "Applications Sent", value: "24", change: "+12%", icon: FileText, color: "text-primary" },
           { title: "Interviews", value: "8", change: "+25%", icon: MessageSquare, color: "text-secondary" },
@@ -229,14 +229,14 @@ export function StudentDashboard({ activeTab }: StudentDashboardProps) {
               transition={{ delay: 0.1 * index }}
             >
               <Card>
-                <CardContent className="p-3 md:p-6">
+                <CardContent className="p-4 md:p-6">
                   <div className="flex items-center justify-between">
                     <div className="min-w-0 flex-1">
-                      <p className="text-xs md:text-sm font-medium text-muted-foreground truncate">{stat.title}</p>
-                      <p className="text-lg md:text-2xl font-bold">{stat.value}</p>
-                      <p className="text-xs text-green-600 hidden sm:block">{stat.change} from last month</p>
+                      <p className="text-sm md:text-base font-medium text-muted-foreground">{stat.title}</p>
+                      <p className="text-xl md:text-2xl font-bold">{stat.value}</p>
+                      <p className="text-xs sm:text-sm text-green-600">{stat.change} from last month</p>
                     </div>
-                    <Icon className={`h-6 w-6 md:h-8 md:w-8 ${stat.color} flex-shrink-0`} />
+                    <Icon className={`h-7 w-7 md:h-8 md:w-8 ${stat.color} flex-shrink-0`} />
                   </div>
                 </CardContent>
               </Card>
@@ -246,14 +246,16 @@ export function StudentDashboard({ activeTab }: StudentDashboardProps) {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 md:gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8">
         <Card>
           <CardHeader className="p-4 md:p-6">
             <CardTitle className="text-lg md:text-xl">Application Progress</CardTitle>
-            <CardDescription className="text-sm">Your internship application journey over time</CardDescription>
+            <CardDescription className="text-sm md:text-base">
+              Your internship application journey over time
+            </CardDescription>
           </CardHeader>
           <CardContent className="p-4 md:p-6 pt-0">
-            <ResponsiveContainer width="100%" height={250}>
+            <ResponsiveContainer width="100%" height={300}>
               <LineChart data={progressData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="month" />
@@ -769,21 +771,21 @@ export function StudentDashboard({ activeTab }: StudentDashboardProps) {
   )
 
   const renderRuralAccessHub = () => (
-    <div className="space-y-4 md:space-y-6">
+    <div className="space-y-6 md:space-y-8">
       {/* Rural Access Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-        <Card className="md:col-span-2">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Globe className="h-5 w-5 text-primary" />
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+        <Card className="lg:col-span-2">
+          <CardHeader className="p-4 md:p-6">
+            <CardTitle className="flex items-center gap-2 text-lg md:text-xl">
+              <Globe className="h-5 w-5 md:h-6 md:w-6 text-primary" />
               Rural Student Participation
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-sm md:text-base">
               Increased internship participation across rural regions with transparency and easier access
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={250}>
+          <CardContent className="p-4 md:p-6 pt-0">
+            <ResponsiveContainer width="100%" height={280}>
               <BarChart data={ruralAccessData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="region" angle={-45} textAnchor="end" height={80} />
@@ -797,15 +799,17 @@ export function StudentDashboard({ activeTab }: StudentDashboardProps) {
         </Card>
 
         <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Wifi className="h-5 w-5 text-secondary" />
+          <CardHeader className="p-4 md:p-6">
+            <CardTitle className="flex items-center gap-2 text-lg md:text-xl">
+              <Wifi className="h-5 w-5 md:h-6 md:w-6 text-secondary" />
               Connectivity Status
             </CardTitle>
-            <CardDescription>Internet access distribution in rural areas</CardDescription>
+            <CardDescription className="text-sm md:text-base">
+              Internet access distribution in rural areas
+            </CardDescription>
           </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={200}>
+          <CardContent className="p-4 md:p-6 pt-0">
+            <ResponsiveContainer width="100%" height={220}>
               <PieChart>
                 <Pie data={connectivityData} cx="50%" cy="50%" innerRadius={40} outerRadius={80} dataKey="value">
                   {connectivityData.map((entry, index) => (
@@ -815,7 +819,7 @@ export function StudentDashboard({ activeTab }: StudentDashboardProps) {
                 <Tooltip />
               </PieChart>
             </ResponsiveContainer>
-            <div className="mt-4 space-y-2">
+            <div className="mt-4 space-y-3">
               {connectivityData.map((item, index) => (
                 <div key={index} className="flex items-center justify-between text-sm">
                   <div className="flex items-center gap-2">
@@ -831,11 +835,11 @@ export function StudentDashboard({ activeTab }: StudentDashboardProps) {
       </div>
 
       {/* Rural Support Features */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
         <Card className="hover:shadow-lg transition-shadow">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg">
-              <Smartphone className="h-5 w-5 text-primary" />
+          <CardHeader className="p-4 md:p-6">
+            <CardTitle className="flex items-center gap-2 text-lg md:text-xl">
+              <Smartphone className="h-5 w-5 md:h-6 md:w-6 text-primary" />
               Mobile-First Access
             </CardTitle>
           </CardHeader>
@@ -864,9 +868,9 @@ export function StudentDashboard({ activeTab }: StudentDashboardProps) {
         </Card>
 
         <Card className="hover:shadow-lg transition-shadow">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg">
-              <Users className="h-5 w-5 text-secondary" />
+          <CardHeader className="p-4 md:p-6">
+            <CardTitle className="flex items-center gap-2 text-lg md:text-xl">
+              <Users className="h-5 w-5 md:h-6 md:w-6 text-secondary" />
               Local Support Network
             </CardTitle>
           </CardHeader>
@@ -895,9 +899,9 @@ export function StudentDashboard({ activeTab }: StudentDashboardProps) {
         </Card>
 
         <Card className="hover:shadow-lg transition-shadow">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg">
-              <TrendingUp className="h-5 w-5 text-accent" />
+          <CardHeader className="p-4 md:p-6">
+            <CardTitle className="flex items-center gap-2 text-lg md:text-xl">
+              <TrendingUp className="h-5 w-5 md:h-6 md:w-6 text-accent" />
               Transparency Dashboard
             </CardTitle>
           </CardHeader>
@@ -982,9 +986,9 @@ export function StudentDashboard({ activeTab }: StudentDashboardProps) {
   )
 
   const renderSkillDevelopment = () => (
-    <div className="space-y-4 md:space-y-6">
+    <div className="space-y-6 md:space-y-8">
       {/* Skill Development Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         {[
           { title: "Modules Completed", value: "18", icon: CheckCircle, color: "text-green-500" },
           { title: "Hours Learned", value: "127", icon: Clock, color: "text-blue-500" },
@@ -1000,13 +1004,13 @@ export function StudentDashboard({ activeTab }: StudentDashboardProps) {
               transition={{ delay: 0.1 * index }}
             >
               <Card>
-                <CardContent className="p-4 md:p-6">
+                <CardContent className="p-5 md:p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-medium text-muted-foreground">{stat.title}</p>
-                      <p className="text-2xl font-bold">{stat.value}</p>
+                      <p className="text-sm md:text-base font-medium text-muted-foreground">{stat.title}</p>
+                      <p className="text-xl md:text-2xl font-bold">{stat.value}</p>
                     </div>
-                    <Icon className={`h-8 w-8 ${stat.color}`} />
+                    <Icon className={`h-7 w-7 md:h-8 md:w-8 ${stat.color}`} />
                   </div>
                 </CardContent>
               </Card>
@@ -1340,10 +1344,15 @@ export function StudentDashboard({ activeTab }: StudentDashboardProps) {
   }
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} className="p-4 md:p-6">
-      <div className="mb-4 md:mb-6">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="p-4 md:p-6 space-y-6"
+    >
+      <div className="mb-6 md:mb-8">
         <h1 className="text-2xl md:text-3xl font-bold text-foreground">Student Dashboard</h1>
-        <p className="text-sm md:text-base text-muted-foreground">Manage your internship journey</p>
+        <p className="text-sm md:text-base text-muted-foreground mt-1">Manage your internship journey</p>
       </div>
 
       {renderContent()}

@@ -20,12 +20,12 @@ export function ResponsiveLayout({ userType, activeTab, onTabChange, children }:
       {isMobile ? (
         <>
           <MobileSidebar userType={userType} activeTab={activeTab} onTabChange={onTabChange} />
-          <main className="px-4 py-6">{children}</main>
+          <main className="px-4 py-6 max-w-full overflow-x-hidden">{children}</main>
         </>
       ) : (
         <>
           <Sidebar userType={userType} activeTab={activeTab} onTabChange={onTabChange} />
-          <main className="ml-64 min-h-screen">{children}</main>
+          <main className="ml-64 min-h-screen p-6 max-w-[calc(100vw-16rem)] overflow-x-hidden">{children}</main>
         </>
       )}
     </div>
