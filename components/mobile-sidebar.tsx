@@ -31,7 +31,7 @@ export function MobileSidebar({ userType, activeTab, onTabChange }: MobileSideba
     <>
       <div className="fixed top-0 left-0 right-0 z-50 h-16 bg-sidebar border-b border-sidebar-border flex items-center justify-between px-4">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild>
+          <SheetTrigger>
             <Button
               variant="ghost"
               size="sm"
